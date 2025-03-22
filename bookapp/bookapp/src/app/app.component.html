@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet"> 
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Readify Book Inventory</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/user-register" (click)="hideContent()">
+                            <i class="fas fa-sign-in-alt custom-icon-size"></i> User Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/user-login" (click)="hideContent()">
+                            <i class="fas fa-sign-in-alt custom-icon-size"></i> User Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin-login" (click)="hideContent()">
+                            <i class="fas fa-user-shield custom-icon-size"></i> Admin Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div *ngIf="isContentVisible" class="content mt-5">
+        <div class="container">    
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1 class="card-title display-4">Welcome to Readify Book Inventory Portal</h1>
+                        <h3 class="lead">Manage your book collection with ease.</h3>
+                        <hr class="my-4">
+                        <p class="card-text">This portal is designed to address the challenges associated with manual bookkeeping, offering a comprehensive solution that caters to the specific needs of book-related businesses, libraries, and educational institutions.</p>
+                        <a class="btn btn-primary btn-lg" routerLink="/user-register" (click)="hideContent()" role="button">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5" *ngIf="!isContentVisible">
+        <router-outlet></router-outlet>
+    </div>
+
+    <section class="container my-5" class="content"  *ngIf="isContentVisible">
+        <h2 class="text-center text-custom-color mb-4">Why Is Readify App Ideal for Book Inventory Management?</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2024/12/Highly-Scalable.webp" class="card-img-top small-img" alt="Scalability and Flexibility">
+                    <div class="card-body">
+                        <h4 class="card-title">Scalability and Flexibility</h4>
+                        <p class="card-text">Readify’s book inventory management system adapts to businesses of all sizes, allowing you to add users, locations, and customize workflows as your bookstore grows.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2025/01/User-Friendly-Interface-2-1.webp" class="card-img-top small-img" alt="User-Friendly Interface">
+                    <div class="card-body">
+                        <h4 class="card-title">User-Friendly Interface</h4>
+                        <p class="card-text">Designed for ease of use, Readify’s book inventory management software has an intuitive layout that minimizes the learning curve, ensuring smooth operations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2024/09/Mobile-Access.png" class="card-img-top small-img" alt="Mobile Accessibility">
+                    <div class="card-body">
+                        <h4 class="card-title">Mobile Accessibility</h4>
+                        <p class="card-text">With Readify’s book inventory app Android, you can track stock, manage orders, and generate reports from anywhere, keeping your business running on the go.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2024/11/Reliable-Customer-Support-7-Days-a-Week.webp" class="card-img-top small-img" alt="Free Customer Support">
+                    <div class="card-body">
+                        <h4 class="card-title">Free Customer Support</h4>
+                        <p class="card-text">Get reliable support via email and live chat, with a comprehensive knowledge base to assist with setup, troubleshooting, and customization.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2025/02/Automatic-Software-Updates.webp" class="card-img-top small-img" alt="Regular Updates and Enhancements">
+                    <div class="card-body">
+                        <h4 class="card-title">Regular Updates and Enhancements</h4>
+                        <p class="card-text">Readify’s best book inventory software continuously improves with new features and security updates, ensuring efficient and modern inventory management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://vyaparapp.in/v/z/wp-content/uploads/2025/02/Secure-Data-Backup-Privacy-Protection.webp" class="card-img-top small-img" alt="Cost-Effective Solution">
+                    <div class="card-body">
+                        <h4 class="card-title">Data Privacy</h4>
+                        <p class="card-text">Readify safeguards your data with password encryption and regular security audits, ensuring your bookstore inventory software free remains protected from threats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+   
+
+
+</body>
+</html>

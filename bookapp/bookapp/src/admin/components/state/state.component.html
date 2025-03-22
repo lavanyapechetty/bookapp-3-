@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Management - Book Inventory Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #f4f4f9;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    .form-control-sm {
+      width: 70%;
+      margin: auto;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-group i {
+      color: #007bff;
+    }
+    .btn-custom {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-custom:hover {
+      background-color: #24ff57;
+    }
+    .btn-secondary-custom {
+      background-color: #0e7b36;
+      color: white;
+    }
+    .btn-secondary-custom:hover {
+      background-color: #24ff57;
+    }
+    .text-center h2, .text-center h3 {
+      color: #343a40;
+    }
+    .table-custom {
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .table-custom th {
+      background-color: #343a40;
+      color: white;
+    }
+    .table-custom tbody tr:nth-child(odd) {
+      background-color: #e9ecef;
+    }
+    .table-custom tbody tr:hover {
+      background-color: #dee2e6;
+    }
+    .table-custom td, .table-custom th {
+      padding: 15px;
+      text-align: center;
+    }
+    .table-custom .isbn-column {
+      font-weight: bold;
+      color: #050a10;
+    }
+    .separator {
+      margin: 40px 0;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header class="text-center">
+    <h3></h3>
+  </header>
+
+  <div class="container mt-5">
+    <!-- Display success and error messages -->
+
+    <!-- Explore All States -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Explore All States</h2>
+      <div class="text-center mb-3">
+        <button class="btn btn-secondary-custom btn-sm" (click)="getAllStates()"><i class="fas fa-search"></i> Discover States</button>
+      </div>
+      <div class="table-responsive table-custom">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><i class="fas fa-code"></i> State Code</th>
+              <th><i class="fas fa-map-marker-alt"></i> State Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let state of states">
+              <td class="isbn-column">{{ state.stateCode }}</td>
+              <td>{{ state.stateName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Add a New State -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Add a New State</h2>
+      <form (ngSubmit)="addState()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="stateCode"><i class="fas fa-code"></i> State Code:</label>
+              <input id="stateCode" [(ngModel)]="newState.stateCode" name="stateCode" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="stateName"><i class="fas fa-map-marker-alt"></i> State Name:</label>
+              <input id="stateName" [(ngModel)]="newState.stateName" name="stateName" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-plus"></i> Add State</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Revise State Name -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Revise State Name</h2>
+      <form (ngSubmit)="updateStateName()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="selectedStateId"><i class="fas fa-code"></i> Select State ID:</label>
+              <input id="selectedStateId" [(ngModel)]="selectedStateId" name="selectedStateId" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updatedStateName"><i class="fas fa-map-marker-alt"></i> New State Name:</label>
+              <input id="updatedStateName" [(ngModel)]="updatedStateName" name="updatedStateName" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update State Name</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Management - Book Inventory Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .table-container {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px; /* Adjust the width as needed */
+      margin: 0 auto; /* Center the table */
+    }
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+    .table thead {
+      background-color: #007bff;
+      color: white;
+    }
+    .table tbody tr:hover {
+      background-color: #e9ecef;
+      cursor: pointer;
+    }
+    .table tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .table tbody tr td {
+      border: 1px solid #dee2e6;
+      padding: 8px; /* Reduce padding for a more compact table */
+    }
+    .table tbody tr td:first-child {
+      border-left: none;
+    }
+    .table tbody tr td:last-child {
+      border-right: none;
+    }
+    .table tbody tr td i {
+      margin-right: 8px;
+    }
+    .nav-links {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .nav-links a {
+      margin: 5px;
+      padding: 10px 15px;
+      color: white;
+      background-color: #007bff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .nav-links a:hover {
+      background-color: #0056b3;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h3>State Management</h3>
+  </header>
+
+  <div class="container">
+    <div class="nav-links">
+
+    </div>
+    <main>
+      <section id="content">
+        <div class="container mt-5">
+          <div class="mb-4" id="section1">
+            <h4>Explore All States</h4>
+            <button class="btn btn-secondary mb-3" (click)="getAllStates()">Discover States</button>
+            <div class="table-container">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th><i class="fas fa-code"></i> State Code</th>
+                    <th><i class="fas fa-map-marker-alt"></i> State Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let state of states">
+                    <td>{{ state.stateCode }}</td>
+                    <td>{{ state.stateName }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="mb-4" id="section2">
+            <h4>Add a New State</h4>
+            <form (ngSubmit)="addState()">
+              <div class="form-group">
+                <label for="stateCode">State Code:</label>
+                <input type="text" id="stateCode" class="form-control" [(ngModel)]="newState.stateCode" name="stateCode" required>
+              </div>
+              <div class="form-group">
+                <label for="stateName">State Name:</label>
+                <input type="text" id="stateName" class="form-control" [(ngModel)]="newState.stateName" name="stateName" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Add State</button>
+            </form>
+          </div>
+          <div class="mb-4" id="section3">
+            <h4>Revise State Name</h4>
+            <form (ngSubmit)="updateStateName()">
+              <div class="form-group">
+                <label for="selectedStateId">Select State ID:</label>
+                <input type="text" id="selectedStateId" class="form-control" [(ngModel)]="selectedStateId" name="selectedStateId" required>
+              </div>
+              <div class="form-group">
+                <label for="updatedStateName">New State Name:</label>
+                <input type="text" id="updatedStateName" class="form-control" [(ngModel)]="updatedStateName" name="updatedStateName" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Update State Name</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> -->

@@ -1,0 +1,281 @@
+container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+   
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+   
+  h2 {
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+   
+  /* Error message */
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+   
+  /* Form styles */
+  .form-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+   
+  .form-group {
+    margin-bottom: 15px;
+  }
+   
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+   
+  .form-group input[type="text"],
+  .form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+   
+  .form-group input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+  }
+   
+  .form-group input[type="checkbox"] {
+    margin-right: 5px;
+    transform: scale(1.2);
+  }
+   
+  /* Button styles */
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+   
+  .btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+   
+  .btn-primary {
+    background-color: #3498db;
+    color: white;
+  }
+   
+  .btn-primary:hover:not([disabled]) {
+    background-color: #2980b9;
+  }
+   
+  .btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+  }
+   
+  .btn-secondary:hover:not([disabled]) {
+    background-color: #7f8c8d;
+  }
+   
+  .btn-info {
+    background-color: #2ecc71;
+    color: white;
+  }
+   
+  .btn-info:hover:not([disabled]) {
+    background-color: #27ae60;
+  }
+   
+  .btn-warning {
+    background-color: #f39c12;
+    color: white;
+  }
+   
+  .btn-warning:hover:not([disabled]) {
+    background-color: #e67e22;
+  }
+   
+  .action-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+   
+  /* Inventory details styles */
+  .inventory-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+   
+  .inventory-details p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+   
+  /* Update form styles */
+  .update-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+   
+  /* Table styles */
+  .inventory-list {
+    overflow-x: auto;
+  }
+   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  }
+   
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+   
+  th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+  }
+   
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+   
+  tr:hover {
+    background-color: #e9f7fe;
+  }
+   
+  td {
+    vertical-align: middle;
+  }
+   
+  /* Action column styling */
+  td:last-child {
+    white-space: nowrap;
+    text-align: center;
+  }
+   
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+   
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+      font-size: 14px;
+      padding: 8px;
+    }
+   
+    .btn {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+   
+    th, td {
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+   
+    .action-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 5px;
+    }
+   
+    .action-buttons .btn {
+      margin-right: 0;
+    }
+  }
+   
+  /* Animation effects */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+   
+  .inventory-details,
+  .update-form,
+  .error-message {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+   
+  /* Print styles */
+  @media print {
+    .container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+   
+    .form-container,
+    .action-buttons,
+    .update-form,
+    button {
+      display: none;
+    }
+   
+    body, h1, h2, p, th, td {
+      color: black;
+    }
+   
+    h1 {
+      border-bottom: 1px solid black;
+    }
+   
+    table {
+      width: 100%;
+      border: 1px solid black;
+      box-shadow: none;
+    }
+   
+    th {
+      background-color: white;
+      color: black;
+      border-bottom: 1px solid black;
+    }
+   
+    tr, td {
+      border-bottom: 1px solid #ddd;
+    }
+  }

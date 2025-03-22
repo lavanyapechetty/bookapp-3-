@@ -1,0 +1,95 @@
+/* Background styling for the entire page */
+body {
+  background-color: #f8f9fa; /* Light grey background */
+  font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.container {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button styling */
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+
+/* List item styling */
+.list-unstyled li {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Flex utilities for list items */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Specific styling for separate sections */
+.book-list {
+  margin-bottom: 40px;
+}
+
+.add-book-form {
+  margin-bottom: 40px;
+}
+
+.edit-book-form {
+  margin-bottom: 40px;
+}
+
+.get-book-form {
+  margin-bottom: 40px;
+}
+
+.get-books-by-title-form {
+  margin-bottom: 40px;
+}
+
+.get-books-by-category-form {
+  margin-bottom: 40px;
+}
+
+.get-books-by-publisherid-form {
+  margin-bottom: 40px;
+}

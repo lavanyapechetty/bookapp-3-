@@ -1,0 +1,40 @@
+<div>
+    <h2>Add New Book Condition</h2>
+    <form (ngSubmit)="addBookCondition()">
+      <label for="ranks">Ranks:</label>
+      <input type="number" id="ranks" [(ngModel)]="newBookCondition.ranks" name="ranks" required>
+     
+      <label for="full_Description">Full Description:</label>
+      <input type="text" id="full_description" [(ngModel)]="newBookCondition.full_Description" name="full_description" required>
+     
+      <label for="description">Description:</label>
+      <input type="text" id="description" [(ngModel)]="newBookCondition.description" name="description" required>
+     
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="newBookCondition.price" name="price" required>
+     
+      <button type="submit">Add Book Condition</button>
+    </form>
+  </div>
+   
+  <div>
+    <h2>Existing Book Conditions</h2>
+    <div *ngFor="let bookCondition of bookConditions">
+      <p>Ranks: {{ bookCondition.ranks }}</p>
+      <p>Full Description: {{ bookCondition.full_Description }}</p>
+      <p>Description: {{ bookCondition.description }}</p>
+      <p>Price: {{ bookCondition.price }}</p>
+     
+      <label for="updateFullDescription">Update Full Description:</label>
+      <input type="text" id="updateFullDescription" [(ngModel)]="bookCondition.full_Description">
+      <button (click)="updateFullDescription(bookCondition.ranks, bookCondition.full_Description)">Update</button>
+     
+      <label for="updateDescription">Update Description:</label>
+      <input type="text" id="updateDescription" [(ngModel)]="bookCondition.description">
+      <button (click)="updateDescription(bookCondition.ranks, bookCondition.description)">Update</button>
+     
+      <label for="updatePrice">Update Price:</label>
+      <input type="number" id="updatePrice" [(ngModel)]="bookCondition.price">
+      <button (click)="updatePrice(bookCondition.ranks, bookCondition.price)">Update</button>
+    </div>
+  </div>

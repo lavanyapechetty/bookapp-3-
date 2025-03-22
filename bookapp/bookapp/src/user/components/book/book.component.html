@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <div class="book-list mb-4">
+    <h1>Book List</h1>
+    <ul class="list-unstyled">
+      <li *ngFor="let book of books" class="mb-3 p-3 border rounded bg-light">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ book.title }} (ISBN: {{ book.isbn }})</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="get-book-form mb-4">
+    <h2>Get Book by ISBN</h2>
+    <form (ngSubmit)="getBookByIsbn(isbn)">
+      <div class="form-group mb-3">
+        <label for="isbn">ISBN:</label>
+        <input id="isbn" [(ngModel)]="isbn" name="isbn" required class="form-control form-control-sm">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm">Get Book</button>
+    </form>
+  </div>
+
+  <div *ngIf="selectedBook" class="book-details mb-4">
+    <h2>Book Details</h2>
+    <p><strong>Title:</strong> {{ selectedBook.title }}</p>
+    <p><strong>ISBN:</strong> {{ selectedBook.isbn }}</p>
+    <p><strong>Description:</strong> {{ selectedBook.description }}</p>
+    <p><strong>Category:</strong> {{ selectedBook.category }}</p>
+    <p><strong>Edition:</strong> {{ selectedBook.edition }}</p>
+    <p><strong>Publisher ID:</strong> {{ selectedBook.publisherid }}</p>
+  </div>
+
+  <div class="get-books-by-title-form mb-4">
+    <h2>Get Books by Title</h2>
+    <form (ngSubmit)="getBooksByTitle(title)">
+      <div class="form-group mb-3">
+        <label for="title">Title:</label>
+        <input id="title" [(ngModel)]="title" name="title" required class="form-control form-control-sm">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm">Get Books</button>
+    </form>
+  </div>
+  
+
+  <div class="get-books-by-category-form mb-4">
+    <h2>Get Books by Category</h2>
+    <form (ngSubmit)="getBooksByCategory(category)">
+      <div class="form-group mb-3">
+        <label for="category">Category:</label>
+        <input id="category" [(ngModel)]="category" name="category" required class="form-control form-control-sm">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm">Get Books</button>
+    </form>
+  </div>
+
+  <div class="get-books-by-publisherid-form mb-4">
+    <h2>Get Books by Publisher ID</h2>
+    <form (ngSubmit)="getBooksByPublisherid(publisherid)">
+      <div class="form-group mb-3">
+        <label for="publisherid">Publisher ID:</label>
+        <input id="publisherid" [(ngModel)]="publisherid" name="publisherid" required class="form-control form-control-sm">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm">Get Books</button>
+    </form>
+  </div>

@@ -1,0 +1,45 @@
+
+<div class="container">
+    <h1>Shopping Cart Management</h1>
+    
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Processing request...</p>
+    </div>
+    
+    <!-- Get Shopping Carts Section -->
+    <div class="section">
+      <h2>Find Shopping Carts by User ID</h2>
+      <form (ngSubmit)="getShoppingCartsByUserId(users.userid)">
+        <div class="form-group">
+          <label for="get-userid">User ID:</label>
+          <input type="number" id="get-userid" [(ngModel)]="users.userid" name="userid" required>
+        </div>
+        <button type="submit" [disabled]="isLoading">Get Shopping Carts</button>
+      </form>
+      <p class="message" [ngClass]="{'success': getMessage.includes('successfully'), 'error': getMessage.includes('Error')}">
+        {{ getMessage }}
+      </p>
+    </div>
+    
+    <!-- Shopping Carts List - Now placed directly after the get section -->
+    <div class="section" *ngIf="shoppingCarts.length > 0">
+      <h2>Shopping Carts</h2>
+      <div class="cart-list">
+        <div class="cart-item" *ngFor="let cart of shoppingCarts; let i = index">
+          <!-- View Mode -->
+          <div *ngIf="editShoppingCartIndex !== i" class="cart-details">
+            <p><strong>User ID:</strong> {{ cart.users.userid }}</p>
+            <p><strong>Username:</strong> {{ cart.users.username || 'N/A' }}</p>
+            <p><strong>Book ISBN:</strong> {{ cart.book.isbn }}</p>
+            <p><strong>Title:</strong> {{ cart.book.title || 'N/A' }}</p>
+          </div>
+      </div>
+    </div>
+    
+    <!-- No Shopping Carts Message -->
+    <div class="section" *ngIf="getMessage && shoppingCarts.length === 0">
+      <p>No shopping carts to display.</p>
+    </div>
+    </div>
+</div>

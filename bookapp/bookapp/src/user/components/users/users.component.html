@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    <h2 class="text-center text-secondary">User Management</h2>
+    
+    <!-- Get User Form -->
+    <div class="card mb-3 animated slideInLeft">
+      <div class="card-header bg-secondary text-light">
+        <h3>Get User</h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">User ID:</label>
+          <div class="col-sm-3">
+            <input class="form-control form-control-sm" [(ngModel)]="newUser.userid" placeholder="User ID">
+          </div>
+        </div>
+        <button class="btn btn-secondary mt-2 animated zoomIn" class= "button" (click)="getUserById(newUser.userid)">Get User</button>
+      </div>
+    </div>
+    
+    <p>{{ message }}</p>
+    
+    <!-- Display Fetched User Details -->
+    <div *ngIf="fetchedUser" class="card mt-3 animated slideInLeft">
+      <div class="card-header bg-secondary text-light">
+        <h3>Fetched User Details</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>User ID:</strong> {{ fetchedUser.userid }}</p>
+        <p><strong>First Name:</strong> {{ fetchedUser.firstname }}</p>
+        <p><strong>Last Name:</strong> {{ fetchedUser.lastname }}</p>
+        <p><strong>Password:</strong> {{ fetchedUser.password }}</p>
+        <p><strong>Phone Number:</strong> {{ fetchedUser.phonenumber }}</p>
+        <p><strong>Role Number:</strong> {{ fetchedUser.rolenumber }}</p>
+        <p><strong>Username:</strong> {{ fetchedUser.username }}</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  

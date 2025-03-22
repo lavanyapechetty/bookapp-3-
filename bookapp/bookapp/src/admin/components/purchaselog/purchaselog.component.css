@@ -1,0 +1,130 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+ 
+  /* Header Styles */
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+  }
+ 
+  h2 {
+    color: #2980b9;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+  }
+ 
+  h3 {
+    color: #3498db;
+    margin-top: 20px;
+    font-size: 1.2em;
+  }
+ 
+  /* Form Section Styles */
+  div > div {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+ 
+  /* Form Control Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+ 
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+ 
+  input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+ 
+  input[type="number"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+ 
+  /* Button Styles */
+  button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+ 
+  button:hover {
+    background-color: #2980b9;
+  }
+ 
+  /* Message Styles */
+  p {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+ 
+  p:not(:empty) {
+    background-color: #e8f4f8;
+    border-left: 4px solid #3498db;
+  }
+ 
+  /* List Styles */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+ 
+  li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+ 
+  li:last-child {
+    border-bottom: none;
+  }
+ 
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px;
+    }
+   
+    div > div {
+      padding: 15px;
+    }
+   
+    button {
+      width: 100%;
+    }
+  }
+ 

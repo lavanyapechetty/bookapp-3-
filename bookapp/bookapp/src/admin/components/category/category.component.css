@@ -1,0 +1,170 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+ 
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+ 
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+ 
+  button:hover {
+    background-color: #45a049;
+  }
+ 
+  form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+ 
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+ 
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+ 
+  .success-message {
+    color: #4CAF50;
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border-left: 4px solid #4CAF50;
+  }
+ 
+  .error-message {
+    color: #36f459;
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border-left: 4px solid #33f83d;
+  }
+ 
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+ 
+  li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .section {
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .edit-form {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+  }
+ 
+  .category-info {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  body {
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+  }
+  header {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  .form-control-sm {
+    width: 50%; /* Reduced width */
+    margin: auto;
+  }
+  .form-group label {
+    font-weight: bold;
+  }
+  .form-group i {
+    color: #ffffff;
+  }
+  .btn-custom {
+    background-color: #28a745;
+    color: white;
+  }
+  .btn-custom:hover {
+    background-color: #24ff57;
+  }
+  .btn-secondary-custom {
+    background-color: #0e7b36;
+    color: white;
+  }
+  .btn-secondary-custom:hover {
+    background-color: #24ff57;
+  }
+  .text-center h2, .text-center h3 {
+    color: #343a40;
+  }
+  .table-custom {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .table-custom th {
+    background-color: #343a40;
+    color: white;
+  }
+  .table-custom tbody tr:nth-child(odd) {
+    background-color: #e9ecef;
+  }
+  .table-custom tbody tr:hover {
+    background-color: #dee2e6;
+  }
+  .table-custom td, .table-custom th {
+    padding: 15px;
+    text-align: center;
+  }
+  .separator {
+    margin: 40px 0;
+    border-bottom: 2px solid #dee2e6;
+  }
+  .container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .input-group-append .btn {
+    margin-left: 10px;
+  }
+  .input-group .form-control-sm {
+    width: 25%; /* Further reduced width for Get Category by ID */
+  }

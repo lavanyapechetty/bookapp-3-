@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management - Book Inventory Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="text-center">
+    <h3></h3>
+  </header>
+  <div class="alert alert-success" role="alert">
+    {{message}}
+  </div>
+ 
+  <div class="container mt-5">
+    <!-- Display success and error messages -->
+
+    <!-- Add User Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Add User</h2>
+      <form (ngSubmit)="addUser()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="userid"><i class="fas fa-id-badge"></i> User ID:</label>
+              <input id="userid" [(ngModel)]="newUser.userid" name="userid" required class="form-control form-control-sm" placeholder="User ID">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="firstname"><i class="fas fa-user"></i> First Name:</label>
+              <input id="firstname" [(ngModel)]="newUser.firstname" name="firstname" required class="form-control form-control-sm" placeholder="First Name">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="lastname"><i class="fas fa-user"></i> Last Name:</label>
+              <input id="lastname" [(ngModel)]="newUser.lastname" name="lastname" required class="form-control form-control-sm" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="password"><i class="fas fa-lock"></i> Password:</label>
+              <input id="password" [(ngModel)]="newUser.password" name="password" required class="form-control form-control-sm" placeholder="Password">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="phonenumber"><i class="fas fa-phone"></i> Phone Number:</label>
+              <input id="phonenumber" [(ngModel)]="newUser.phonenumber" name="phonenumber" required class="form-control form-control-sm" placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="rolenumber"><i class="fas fa-user-tag"></i> Role Number:</label>
+              <input id="rolenumber" [(ngModel)]="newUser.rolenumber" name="rolenumber" required class="form-control form-control-sm" placeholder="Role Number">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="username"><i class="fas fa-user"></i> Username:</label>
+              <input id="username" [(ngModel)]="newUser.username" name="username" required class="form-control form-control-sm" placeholder="Username">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary mt-2 animated zoomIn"><i class="fas fa-plus"></i> Add User</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Get User Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Get User</h2>
+      <form (ngSubmit)="getUserById(newUser.userid)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="userid"><i class="fas fa-id-badge"></i> User ID:</label>
+              <input id="userid" [(ngModel)]="newUser.userid" name="userid" required class="form-control form-control-sm" placeholder="User ID">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary mt-2 animated zoomIn"><i class="fas fa-search"></i> Get User</button>
+        </div>
+      </form>
+    </div>
+
+     
+   
+  
+    <!-- Display Fetched User Details -->
+    <div *ngIf="fetchedUser" class="card mt-3 animated slideInLeft">
+      <div class="card-header bg-secondary text-light">
+        <h3>Fetched User Details</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>User ID:</strong> {{ fetchedUser.userid }}</p>
+        <p><strong>First Name:</strong> {{ fetchedUser.firstname }}</p>
+        <p><strong>Last Name:</strong> {{ fetchedUser.lastname }}</p>
+        <p><strong>Password:</strong> {{ fetchedUser.password }}</p>
+        <p><strong>Phone Number:</strong> {{ fetchedUser.phonenumber }}</p>
+        <p><strong>Role Number:</strong> {{ fetchedUser.rolenumber }}</p>
+        <p><strong>Username:</strong> {{ fetchedUser.username }}</p>
+      </div>
+    </div>
+  </div>
+
+    <div class="separator"></div>
+
+    <!-- Update User First Name Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update User First Name</h2>
+      <form (ngSubmit)="updateUserFirstname(newUser.userid, newUser.firstname)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="userid"><i class="fas fa-id-badge"></i> User ID:</label>
+              <input id="userid" [(ngModel)]="newUser.userid" name="userid" required class="form-control form-control-sm" placeholder="User ID">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="firstname"><i class="fas fa-user"></i> First Name:</label>
+              <input id="firstname" [(ngModel)]="newUser.firstname" name="firstname" required class="form-control form-control-sm" placeholder="First Name">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary mt-2 animated zoomIn"><i class="fas fa-sync-alt"></i> Update First Name</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update User Last Name Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update User Last Name</h2>
+      <form (ngSubmit)="updateUserLastname(newUser.userid, newUser.lastname)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="userid"><i class="fas fa-id-badge"></i> User ID:</label>
+              <input id="userid" [(ngModel)]="newUser.userid" name="userid" required class="form-control form-control-sm" placeholder="User ID">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="lastname"><i class="fas fa-user"></i> Last Name:</label>
+              <input id="lastname" [(ngModel)]="newUser.lastname" name="lastname" required class="form-control form-control-sm" placeholder="Last Name">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary mt-2 animated zoomIn"><i class="fas fa-sync-alt"></i> Update Last Name</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update User Phone Number Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update User Phone Number</h2>
+      <form (ngSubmit)="updateUserPhonenumber(newUser.userid, newUser.phonenumber)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="userid"><i class="fas fa-id-badge"></i> User ID:</label>
+              <input id="userid" [(ngModel)]="newUser.userid" name="userid" required class="form-control form-control-sm" placeholder="User ID">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="phonenumber"><i class="fas fa-phone"></i> Phone Number:</label>
+              <input id="phonenumber" [(ngModel)]="newUser.phonenumber" name="phonenumber" required class="form-control form-control-sm" placeholder="Phone Number">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+
+
+
+          <button type="submit" class="btn btn-secondary mt-2 animated zoomIn"><i class="fas fa-sync-alt"></i> Update Phone Number</button>
+        </div>
+      </form>
+    </div>
+ 
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+  </html>
+
+
+
+
+
+
+<!-- <div>
+    <h2>User Management</h2>
+    <div>
+      <label>User ID:</label>
+      <input [(ngModel)]="newUser.userid" placeholder="User ID">
+    </div>
+    <div>
+      <label>First Name:</label>
+      <input [(ngModel)]="newUser.firstname" placeholder="First Name">
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <input [(ngModel)]="newUser.lastname" placeholder="Last Name">
+    </div>
+    <div>
+      <label>Password:</label>
+      <input [(ngModel)]="newUser.password" placeholder="Password">
+    </div>
+    <div>
+      <label>Phone Number:</label>
+      <input [(ngModel)]="newUser.phonenumber" placeholder="Phone Number">
+    </div>
+    <div>
+      <label>Role Number:</label>
+      <input [(ngModel)]="newUser.rolenumber" placeholder="Role Number">
+    </div>
+    <div>
+      <label>Username:</label>
+      <input [(ngModel)]="newUser.username" placeholder="Username">
+    </div>
+    <button (click)="addUser()">Add User</button>
+    <button (click)="getUserById(newUser.userid)">Get User</button>
+    <button (click)="updateUserFirstname(newUser.userid, newUser.firstname)">Update First Name</button>
+    <button (click)="updateUserLastname(newUser.userid, newUser.lastname)">Update Last Name</button>
+    <button (click)="updateUserPhonenumber(newUser.userid, newUser.phonenumber)">Update Phone Number</button>
+    <p>{{ message }}</p>
+  </div>
+  
+  <div *ngIf="fetchedUser">
+    <p>User ID: {{ fetchedUser.userid }}</p>
+    <p>First Name: {{ fetchedUser.firstname }}</p>
+    <p>Last Name: {{ fetchedUser.lastname }}</p>
+    <p>Password: {{ fetchedUser.password }}</p>
+    <p>Phone Number: {{ fetchedUser.phonenumber }}</p>
+    <p>Role Number: {{ fetchedUser.rolenumber }}</p>
+    <p>Username: {{ fetchedUser.username }}</p>
+    
+  </div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div>
+    <h2>User Management</h2>
+    <div>
+      <label>User ID:</label>
+      <input [(ngModel)]="newUser.userid" placeholder="User ID">
+    </div>
+    <div>
+      <label>First Name:</label>
+      <input [(ngModel)]="newUser.firstname" placeholder="First Name">
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <input [(ngModel)]="newUser.lastname" placeholder="Last Name">
+    </div>
+    <div>
+      <label>Password:</label>
+      <input [(ngModel)]="newUser.password" placeholder="Password">
+    </div>
+    <div>
+      <label>Phone Number:</label>
+      <input [(ngModel)]="newUser.phonenumber" placeholder="Phone Number">
+    </div>
+    <div>
+      <label>Role Number:</label>
+      <input [(ngModel)]="newUser.rolenumber" placeholder="Role Number">
+    </div>
+    <div>
+      <label>Username:</label>
+      <input [(ngModel)]="newUser.username" placeholder="Username">
+    </div>
+    <button (click)="addUser()">Add User</button>
+    <button (click)="getUserById(newUser.userid)">Get User</button>
+    <button (click)="updateUserFirstname(newUser.userid, newUser.firstname)">Update First Name</button>
+    <button (click)="updateUserLastname(newUser.userid, newUser.lastname)">Update Last Name</button>
+    <button (click)="updateUserPhonenumber(newUser.userid, newUser.phonenumber)">Update Phone Number</button>
+    <p>{{ message }}</p>
+  </div>
+  
+  <div *ngFor="let user of users">
+    <p>{{ user.firstname }} {{ user.lastname }}</p>
+    <p>{{ user.phonenumber }}</p>
+    <button (click)="updateUserPhonenumber(user.userid, user.phonenumber)">Update Phone Number</button>
+  </div>
+  <p>{{ message }}</p> --> 

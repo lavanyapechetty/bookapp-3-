@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="section">
+    <h2>Categories</h2>
+    <button (click)="toggleAddCategoryForm()">Add Category</button>
+ 
+    <div *ngIf="showAddCategoryForm">
+      <form (ngSubmit)="addCategory()">
+        <h2>Add New Category</h2>
+        <label for="catid">Category ID:</label>
+        <input id="catid" [(ngModel)]="newCategory.catid" name="catid" type="number" required>
+       
+        <label for="catdescription">Category Description:</label>
+        <input id="catdescription" [(ngModel)]="newCategory.catdescription" name="catdescription" required>
+       
+        <button type="submit">Add Category</button>
+      </form>
+    </div>
+ 
+    <div *ngIf="addMessage" [ngClass]="{'success-message': isSuccess, 'error-message': !isSuccess}">
+      {{ addMessage }}
+    </div>
+ 
+    <ul *ngIf="categories.length > 0">
+      <li *ngFor="let category of categories; let i = index">
+        <div *ngIf="editCategoryIndex !== i" class="category-info">
+          <span><strong>ID:</strong> {{ category.catid }}</span><br>
+          <span><strong>Description:</strong> {{ category.catdescription }}</span><br>
+          <button (click)="editCategory(i)">Edit</button>
+        </div>
+        <div *ngIf="editCategoryIndex === i" class="edit-form">
+          <label for="edit-catid">ID:</label>
+          <input id="edit-catid" [(ngModel)]="category.catid" name="catid" type="number" required>
+         
+          <label for="edit-catdescription">Description:</label>
+          <input id="edit-catdescription" [(ngModel)]="category.catdescription" name="catdescription" required>
+         
+          <button (click)="saveCategory(i)">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </div>
+      </li>
+    </ul>
+    <div *ngIf="categories.length === 0 && !showAddCategoryForm">
+      No categories available.
+    </div>
+  </div>
+ 
+  <div class="section">
+    <h2>Get Category by ID</h2>
+    <input #catidInput type="number" placeholder="Category ID">
+    <button (click)="getCategoryById(catidInput.value)">Get Category</button>
+    <div *ngIf="category.catdescription" class="success-message">Description: {{ category.catdescription }}</div>
+    <div *ngIf="!category.catdescription && getMessage" class="error-message">{{ getMessage }}</div>
+  </div>
+ 
+  <div class="section">
+    <h2>Update Category Description</h2>
+    <input [(ngModel)]="category.catid" type="number" placeholder="Category ID">
+    <input [(ngModel)]="category.catdescription" placeholder="New Description">
+    <button (click)="updateCategoryDescription(category.catid)">Update Description</button>
+    <div *ngIf="updateMessage" [ngClass]="{'success-message': updateSuccess, 'error-message': !updateSuccess}">
+      {{ updateMessage }}
+    </div>
+  </div>
+</div>

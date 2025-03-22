@@ -1,0 +1,315 @@
+<!-- <p>bookreview works!</p>
+
+<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div>
+  <h3>Add Book Review</h3>
+  <form (ngSubmit)="addBookReview()">
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" [(ngModel)]="newBookReview.isbn" name="isbn" required>
+   
+    <label for="reviewerid">Reviewer ID:</label>
+    <input type="number" id="reviewerid" [(ngModel)]="newBookReview.reviewerid" name="reviewerid" required>
+   
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" [(ngModel)]="newBookReview.rating" name="rating" required>
+   
+    <label for="comments">Comments:</label>
+    <input type="text" id="comments" [(ngModel)]="newBookReview.comments" name="comments" required>
+   
+    <button type="submit">Add Review</button>
+  </form>
+</div>
+
+<div>
+  <h3>Get Reviews by ISBN</h3>
+  <form (ngSubmit)="getReviewsByIsbn()">
+    <label for="isbnSearch">ISBN:</label>
+    <input type="text" id="isbnSearch" [(ngModel)]="isbnSearch" name="isbnSearch" required>
+    <button type="submit">Get Reviews</button>
+  </form>
+</div>
+
+<div *ngIf="reviewsByIsbn.length > 0; else noReviewsByIsbn">
+  <h3>Reviews for ISBN: {{ isbnSearch }}</h3>
+  <ul>
+    <li *ngFor="let review of reviewsByIsbn">
+      Reviewer ID: {{ review.reviewerid }}, Rating: {{ review.rating }}, Comments: {{ review.comments }}
+    </li>
+  </ul>
+</div>
+<ng-template #noReviewsByIsbn>
+  <p>No reviews available for this ISBN.</p>
+</ng-template>
+
+<div>
+  <h3>Update Rating</h3>
+  <form (ngSubmit)="updateRating()">
+    <label for="isbnUpdate">ISBN:</label>
+    <input type="text" id="isbnUpdate" [(ngModel)]="isbnUpdate" name="isbnUpdate" required>
+   
+    <label for="ratingUpdate">New Rating:</label>
+    <input type="number" id="ratingUpdate" [(ngModel)]="ratingUpdate" name="ratingUpdate" required>
+   
+    <button type="submit">Update Rating</button>
+  </form>
+</div>
+
+<div>
+  <h3>Update Comments</h3>
+  <form (ngSubmit)="updateComments()">
+    <label for="isbnCommentsUpdate">ISBN:</label>
+    <input type="text" id="isbnCommentsUpdate" [(ngModel)]="isbnCommentsUpdate" name="isbnCommentsUpdate" required>
+   
+    <label for="commentsUpdate">New Comments:</label>
+    <input type="text" id="commentsUpdate" [(ngModel)]="commentsUpdate" name="commentsUpdate" required>
+   
+    <button type="submit">Update Comments</button>
+  </form>
+</div>
+  -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reviews</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f4f4f9;
+        font-family: Arial, sans-serif;
+      }
+      header {
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+      .form-control-sm {
+        width: 70%;
+        margin: auto;
+      }
+      .form-group label {
+        font-weight: bold;
+      }
+      .form-group i {
+        color: #007bff;
+      }
+      .btn-custom {
+        background-color: #28a745;
+        color: white;
+      }
+      .btn-custom:hover {
+        background-color: #24ff57;
+      }
+      .btn-secondary-custom {
+        background-color: #0e7b36;
+        color: white;
+      }
+      .btn-secondary-custom:hover {
+        background-color: #24ff57;
+      }
+      .text-center h2, .text-center h3 {
+        color: #343a40;
+      }
+      .table-custom {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .table-custom th {
+        background-color: #343a40;
+        color: white;
+      }
+      .table-custom tbody tr:nth-child(odd) {
+        background-color: #e9ecef;
+      }
+      .table-custom tbody tr:hover {
+        background-color: #dee2e6;
+      }
+      .table-custom td, .table-custom th {
+        padding: 15px;
+        text-align: center;
+      }
+      .table-custom .isbn-column {
+        font-weight: bold;
+        color: #050a10;
+      }
+      .separator {
+        margin: 40px 0;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="text-center">
+      <h3>Book Inventory Portal</h3>
+    </header>
+  
+    <div class="container mt-5">
+      <!-- Display success and error messages -->
+  
+      <!-- Discover Reviews Button -->
+      <div class="text-center mb-4">
+        <button id="discoverReviewsBtn" class="btn btn-custom btn-sm"><i class="fas fa-search"></i> Discover Reviews</button>
+      </div>
+  
+      <!-- Display all book reviews in a table at the top -->
+      <div id="bookReviewsTable" style="display: none;">
+        <h3 class="fade-in">All Book Reviews</h3>
+        <div class="table-responsive table-custom">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ISBN</th>
+                <th scope="col">Reviewer ID</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let review of bookReviews">
+                <td class="isbn-column">{{ review.isbn }}</td>
+                <td>{{ review.reviewerid }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comments }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noBookReviews>
+        <p class="fade-in">No book reviews available.</p>
+      </ng-template>
+  
+      <div class="separator"></div>
+  
+      <!-- Form to add a new book review -->
+      <div class="add-book-form mb-4">
+        <h2 class="text-center">Add Book Review</h2>
+        <form (ngSubmit)="addBookReview()" class="p-4 border rounded bg-light shadow-sm">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="isbn"><i class="fas fa-barcode"></i> ISBN:</label>
+                <input id="isbn" [(ngModel)]="newBookReview.isbn" name="isbn" required class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="reviewerid"><i class="fas fa-user"></i> Reviewer ID:</label>
+                <input id="reviewerid" [(ngModel)]="newBookReview.reviewerid" name="reviewerid" required class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="rating"><i class="fas fa-star"></i> Rating:</label>
+                <input id="rating" [(ngModel)]="newBookReview.rating" name="rating" required class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="comments"><i class="fas fa-comments"></i> Comments:</label>
+                <input id="comments" [(ngModel)]="newBookReview.comments" name="comments" required class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-plus"></i> Add Review</button>
+          </div>
+        </form>
+      </div>
+      <div class="separator"></div>
+  
+      <!-- Form to get all reviews by ISBN -->
+      <div class="add-book-form mb-4">
+        <h2 class="text-center">Get Reviews by ISBN</h2>
+        <form (ngSubmit)="getReviewsByIsbn()" class="p-4 border rounded bg-light shadow-sm">
+          <div class="form-group">
+            <label for="isbnSearch"><i class="fas fa-barcode"></i> ISBN:</label>
+            <input id="isbnSearch" [(ngModel)]="isbnSearch" name="isbnSearch" required class="form-control form-control-sm">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-secondary-custom btn-sm"><i class="fas fa-search"></i> Get Reviews</button>
+          </div>
+        </form>
+      </div>
+      <div class="separator"></div>
+  
+      <!-- Display reviews by ISBN -->
+      <div *ngIf="reviewsByIsbn.length > 0; else noReviewsByIsbn" class="add-book-form mb-4">
+        <h2 class="text-center">Reviews for ISBN: {{ isbnSearch }}</h2>
+        <ul class="list-group fade-in">
+          <li class="list-group-item" *ngFor="let review of reviewsByIsbn">
+            Reviewer ID: {{ review.reviewerid }}, Rating: {{ review.rating }}, Comments: {{ review.comments }}
+          </li>
+        </ul>
+      </div>
+      <ng-template #noReviewsByIsbn>
+        <p class="fade-in">No reviews available for this ISBN.</p>
+      </ng-template>
+  
+      <div class="separator"></div>
+  
+      <!-- Form to update rating -->
+      <div class="add-book-form mb-4">
+        <h2 class="text-center">Update Rating</h2>
+        <form (ngSubmit)="updateRating()" class="p-4 border rounded bg-light shadow-sm">
+          <div class="form-group">
+            <label for="isbnUpdate"><i class="fas fa-barcode"></i> ISBN:</label>
+            <input id="isbnUpdate" [(ngModel)]="isbnUpdate" name="isbnUpdate" required class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="ratingUpdate"><i class="fas fa-star"></i> New Rating:</label>
+            <input id="ratingUpdate" [(ngModel)]="ratingUpdate" name="ratingUpdate" required class="form-control form-control-sm">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-secondary-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Rating</button>
+          </div>
+        </form>
+      </div>
+  
+      <div class="separator"></div>
+           <!-- Form to update comments -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Comments</h2>
+      <form (ngSubmit)="updateComments()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="form-group">
+          <label for="isbnCommentsUpdate"><i class="fas fa-barcode"></i> ISBN:</label>
+          <input id="isbnCommentsUpdate" [(ngModel)]="isbnCommentsUpdate" name="isbnCommentsUpdate" required class="form-control form-control-sm">
+        </div>
+
+        <div class="form-group">
+          <label for="commentsUpdate"><i class="fas fa-comments"></i> New Comments:</label>
+          <input id="commentsUpdate" [(ngModel)]="commentsUpdate" name="commentsUpdate" required class="form-control form-control-sm">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Comments</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('discoverReviewsBtn').addEventListener('click', function() {
+  var reviewsTable = document.getElementById('bookReviewsTable');
+  if (reviewsTable.style.display === 'none') {
+    reviewsTable.style.display = 'block';
+  } else {
+    reviewsTable.style.display = 'none';
+  }
+});
+  </script>
+</body>
+</html>

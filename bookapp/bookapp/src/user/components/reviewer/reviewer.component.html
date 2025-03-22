@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Reviewer Management</h2>
+  
+    <div class="form-group">
+      <label for="reviewerId">Reviewer ID:</label>
+      <input type="number" id="reviewerid" [(ngModel)]="reviewerid" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="reviewerName">Reviewer Name:</label>
+      <input type="text" id="reviewerName" [(ngModel)]="reviewerName" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="reviewerEmployedBy">Employed By:</label>
+      <input type="text" id="reviewerEmployedBy" [(ngModel)]="reviewerEmployedBy" class="form-control">
+    </div>
+  
+    <button (click)="getReviewerById()" class="btn btn-secondary">Get Reviewer</button>
+  
+    <div *ngIf="reviewer">
+      <h3>Reviewer Details</h3>
+      <p>ID: {{ reviewer.reviewerid }}</p>
+      <p>Name: {{ reviewer.name }}</p>
+      <p>Employed By: {{ reviewer.employedby }}</p>
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+
+

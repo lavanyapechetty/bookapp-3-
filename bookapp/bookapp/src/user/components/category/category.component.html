@@ -1,0 +1,7 @@
+<div class="section">
+  <h2>Get Category by ID</h2>
+  <input #catidInput type="number" placeholder="Category ID">
+  <button (click)="getCategoryById(catidInput.value)">Get Category</button>
+  <div *ngIf="category.catdescription" class="success-message">Description: {{ category.catdescription }}</div>
+  <div *ngIf="!category.catdescription && getMessage" class="error-message">{{ getMessage }}</div>
+</div>

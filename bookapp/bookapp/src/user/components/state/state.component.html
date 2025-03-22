@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Management - Book Inventory Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h3>State Management
+    </h3>
+   
+  </header>
+  <div class="container">
+   
+              <!-- <li><a routerLink="/user-login"><i class="fas fa-sign-in-alt"></i> User Login</a></li>
+              <li><a routerLink="/user-register"><i class="fas fa-user-plus"></i> User Register</a></li>
+              <li><a routerLink="/admin-login"><i class="fas fa-user-shield"></i> Admin Login</a></li> -->
+          
+      
+      <main>
+          <section id="content">
+
+                
+            
+            
+                <div>
+                  <h4>All States</h4>
+                  <button class="btn btn-secondary mb-3" (click)="getAllStates()">Fetch All States</button>
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let state of states">
+                      {{ state.stateCode }} - {{ state.stateName }}
+                    </li>
+                  </ul>
+                </div>
+          </section>
+      </main>
+  </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const links = document.querySelectorAll('nav ul li a');
+          const content = document.getElementById('content');
+
+          links.forEach(link => {
+              link.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const path = link.getAttribute('routerLink').substring(1);
+                  loadContent(path);
+              });
+          });
+
+          function loadContent(path) {
+              fetch(`/${path}.html`)
+                  .then(response => response.text())
+                  .then(data => {
+                      content.innerHTML = data;
+                  })
+                  .catch(error => console.error('Error loading content:', error));
+          }
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<div class="container">
+ 
+    <h1>Purchase Log</h1>
+   
+    <div>
+      <h2>Add Purchase Log</h2>
+      <form (ngSubmit)="addPurchaseLog()">
+        <label for="addUserid">User ID:</label>
+        <input type="number" id="addUserid" [(ngModel)]="newPurchaseLog.users.userid" name="addUserid" required>
+       
+        <label for="addInventoryid">Inventory ID:</label>
+        <input type="number" id="addInventoryid" [(ngModel)]="newPurchaseLog.inventory.inventoryid" name="addInventoryid" required>
+       
+        <button type="submit">Add Purchase Log</button>
+      </form>
+      <p>{{ addMessage }}</p>
+    </div>
+   
+    <div>
+      <h2>Get Purchase Log by User ID</h2>
+      <form (ngSubmit)="getPurchaseLogByUserId(getUserId)">
+        <label for="getUserid">User ID:</label>
+        <input type="number" id="getUserid" [(ngModel)]="getUserId" name="getUserid" required>
+        <button type="submit">Get Purchase Log</button>
+      </form>
+      <p>{{ getMessage }}</p>
+     
+      <div *ngIf="purchaseLogs.length">
+        <h3>Purchase Logs:</h3>
+        <ul>
+          <li *ngFor="let log of purchaseLogs">
+            User ID: {{ log.users.userid }} - Inventory ID: {{ log.inventory.inventoryid }}
+          </li>
+        </ul>
+      </div>
+    </div>
+   
+    <div>
+      <h2>Update Inventory ID</h2>
+      <form (ngSubmit)="updateInventoryId(updateUserId)">
+        <label for="updateUserid">User ID:</label>
+        <input type="number" id="updateUserid" [(ngModel)]="updateUserId" name="updateUserid" required>
+       
+        <label for="updateInventoryid">New Inventory ID:</label>
+        <input type="number" id="updateInventoryid" [(ngModel)]="updateInventory.inventoryid" name="updateInventoryid" required>
+       
+        <button type="submit">Update Inventory ID</button>
+      </form>
+      <p>{{ updateMessage }}</p>
+    </div>
+  </div>
+   

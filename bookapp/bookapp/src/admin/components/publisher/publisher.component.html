@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publishers - Book Inventory Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="text-center">
+    <h3></h3>
+  </header>
+
+  <div class="container mt-5">
+    <!-- Display success and error messages -->
+
+    <!-- Explore All Publishers -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Explore All Publishers</h2>
+      <div class="text-center mb-3">
+        <button class="btn btn-secondary-custom btn-sm" (click)="getAllPublishers()"><i class="fas fa-search"></i> Discover Publishers</button>
+      </div>
+      <div *ngIf="publishers.length > 0" class="table-responsive table-custom">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><i class="fas fa-code"></i> Publisher Name</th>
+              <th><i class="fas fa-city"></i> City</th>
+              <th><i class="fas fa-map-marker-alt"></i> State</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let publisher of publishers">
+              <td class="isbn-column">{{ publisher.name }}</td>
+              <td>{{ publisher.city }}</td>
+              <td>{{ publisher.state.stateName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Add a New Publisher -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Add a New Publisher</h2>
+      <form (ngSubmit)="addPublisher()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name"><i class="fas fa-code"></i> Name:</label>
+              <input id="name" [(ngModel)]="newPublisher.name" name="name" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city"><i class="fas fa-city"></i> City:</label>
+              <input id="city" [(ngModel)]="newPublisher.city" name="city" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="stateCode"><i class="fas fa-code"></i> State Code:</label>
+              <input id="stateCode" [(ngModel)]="newPublisher.state.stateCode" name="stateCode" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="stateName"><i class="fas fa-map-marker-alt"></i> State Name:</label>
+              <input id="stateName" [(ngModel)]="newPublisher.state.stateName" name="stateName" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-plus"></i> Add Publisher</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update Publisher Name -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Publisher Name</h2>
+      <form (ngSubmit)="updatePublisherName()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateNameId"><i class="fas fa-code"></i> Publisher ID:</label>
+              <input id="updateNameId" [(ngModel)]="updateNameId" name="updateNameId" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateName"><i class="fas fa-sync-alt"></i> New Name:</label>
+              <input id="updateName" [(ngModel)]="updateName" name="updateName" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Name</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update Publisher City -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Publisher City</h2>
+      <form (ngSubmit)="updatePublisherCity()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateCityId"><i class="fas fa-code"></i> Publisher ID:</label>
+              <input id="updateCityId" [(ngModel)]="updateCityId" name="updateCityId" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateCity"><i class="fas fa-sync-alt"></i> New City:</label>
+              <input id="updateCity" [(ngModel)]="updateCity" name="updateCity" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update City</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update Publisher State -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Publisher State</h2>
+      <form (ngSubmit)="updatePublisherState()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateStateId"><i class="fas fa-code"></i> Publisher ID:</label>
+              <input id="updateStateId" [(ngModel)]="updateStateId" name="updateStateId" required class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateStateCode"><i class="fas fa-code"></i> New State Code:</label>
+              <input id="updateStateCode" [(ngModel)]="updateState.stateCode" name="updateStateCode" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="updateStateName"><i class="fas fa-map-marker-alt"></i> New State Name:</label>
+              <input id="updateStateName" [(ngModel)]="updateState.stateName" name="updateStateName" required class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update State</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publishers</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    .slide-in {
+      animation: slideIn 1s ease-in-out;
+    }
+    .list-group-item {
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .list-group-item:hover {
+      transform: scale(1.05);
+      background-color: #f8f9fa;
+    }
+    .form-group {
+      animation: fadeIn 1s ease-in-out;
+    }
+    .btn-primary, .btn-secondary {
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+    .container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2, h3 {
+      text-align: center;
+      color: #343a40;
+    }
+    .header {
+      background: linear-gradient(135deg, #6c757d 25%, #343a40 100%);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="header">
+      <h2 class="mb-4 slide-in">Publishers</h2>
+    </div>
+    <ul class="list-group mb-4">
+      <li class="list-group-item fade-in" *ngFor="let publisher of publishers">
+        {{ publisher.name }} - {{ publisher.city }} - {{ publisher.state.stateName }}
+      </li>
+    </ul>
+
+    <h3 class="mb-3 slide-in">Add Publisher</h3>
+    <form (ngSubmit)="addPublisher()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="newPublisher.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="newPublisher.city" name="city" required>
+      </div>
+      <div class="form-group">
+        <label for="stateCode">State Code:</label>
+        <input type="text" class="form-control" id="stateCode" [(ngModel)]="newPublisher.state.stateCode" name="stateCode" required>
+      </div>
+      <div class="form-group">
+        <label for="stateName">State Name:</label>
+        <input type="text" class="form-control" id="stateName" [(ngModel)]="newPublisher.state.stateName" name="stateName" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Publisher</button>
+    </form>
+
+    <h3 class="mt-4 mb-3 slide-in">Update Publisher Name</h3>
+    <form (ngSubmit)="updatePublisherName()">
+      <div class="form-group">
+        <label for="updateNameId">Publisher ID:</label>
+        <input type="number" class="form-control" id="updateNameId" [(ngModel)]="updateNameId" name="updateNameId" required>
+      </div>
+      <div class="form-group">
+        <label for="updateName">New Name:</label>
+        <input type="text" class="form-control" id="updateName" [(ngModel)]="updateName" name="updateName" required>
+      </div>
+      <button type="submit" class="btn btn-secondary">Update Name</button>
+    </form>
+
+    <h3 class="mt-4 mb-3 slide-in">Update Publisher City</h3>
+    <form (ngSubmit)="updatePublisherCity()">
+      <div class="form-group">
+        <label for="updateCityId">Publisher ID:</label>
+        <input type="number" class="form-control" id="updateCityId" [(ngModel)]="updateCityId" name="updateCityId" required>
+      </div>
+      <div class="form-group">
+        <label for="updateCity">New City:</label>
+        <input type="text" class="form-control" id="updateCity" [(ngModel)]="updateCity" name="updateCity" required>
+      </div>
+      <button type="submit" class="btn btn-secondary">Update City</button>
+    </form>
+
+    <h3 class="mt-4 mb-3 slide-in">Update Publisher State</h3>
+    <form (ngSubmit)="updatePublisherState()">
+      <div class="form-group">
+        <label for="updateStateId">Publisher ID:</label>
+        <input type="number" class="form-control" id="updateStateId" [(ngModel)]="updateStateId" name="updateStateId" required>
+      </div>
+      <div class="form-group">
+        <label for="updateStateCode">New State Code:</label>
+        <input type="text" class="form-control" id="updateStateCode" [(ngModel)]="updateState.stateCode" name="updateStateCode" required>
+      </div>
+      <div class="form-group">
+        <label for="updateStateName">New State Name:</label>
+        <input type="text" class="form-control" id="updateStateName" [(ngModel)]="updateState.stateName" name="updateStateName" required>
+      </div>
+      <button type="submit" class="btn btn-secondary">Update State</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> -->

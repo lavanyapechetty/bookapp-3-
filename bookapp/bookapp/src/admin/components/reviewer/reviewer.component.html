@@ -1,0 +1,256 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Management</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+      
+
+        
+        <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Add Reviewer</h3>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="addReviewer()">
+                    <div class="form-group">
+                        <label for="reviewerid">Reviewer ID:</label>
+                        <input type="number" class="form-control" id="reviewerid" [(ngModel)]="reviewerid" name="reviewerid" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewerName">Name:</label>
+                        <input type="text" class="form-control" id="reviewerName" [(ngModel)]="reviewerName" name="reviewerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewerEmployedBy">Employed By:</label>
+                        <input type="text" class="form-control" id="reviewerEmployedBy" [(ngModel)]="reviewerEmployedBy" name="reviewerEmployedBy" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Reviewer</button>
+                </form>
+            </div>
+        </div>
+
+       
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Get Reviewer by ID</h3>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="getReviewerById()">
+                    <div class="form-group">
+                        <label for="revieweridSearch">Reviewer ID:</label>
+                        <input type="number" class="form-control" id="revieweridSearch" [(ngModel)]="reviewerid" name="revieweridSearch" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Reviewer</button>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="reviewer" class="card mb-4">
+            <div class="card-header">
+                <h3>Reviewer Details</h3>
+            </div>
+            <div class="card-body">
+                <p>ID: {{ reviewer.reviewerid }}</p>
+                <p>Name: {{ reviewer.name }}</p>
+                <p>Employed By: {{ reviewer.employedby }}</p>
+            </div>
+        </div>
+
+       
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Update Reviewer Name</h3>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="updateReviewerName(reviewerid)">
+                    <div class="form-group">
+                        <label for="revieweridUpdateName">Reviewer ID:</label>
+                        <input type="number" class="form-control" id="revieweridUpdateName" [(ngModel)]="reviewerid" name="revieweridUpdateName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewerNameUpdate">New Name:</label>
+                        <input type="text" class="form-control" id="reviewerNameUpdate" [(ngModel)]="reviewerName" name="reviewerNameUpdate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Name</button>
+                </form>
+            </div>
+        </div>
+
+       
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Update Reviewer Employed By</h3>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="updateReviewerEmployedBy(reviewerid)">
+                    <div class="form-group">
+                        <label for="revieweridUpdateEmployedBy">Reviewer ID:</label>
+                        <input type="number" class="form-control" id="revieweridUpdateEmployedBy" [(ngModel)]="reviewerid" name="revieweridUpdateEmployedBy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewerEmployedByUpdate">New Employed By:</label>
+                        <input type="text" class="form-control" id="reviewerEmployedByUpdate" [(ngModel)]="reviewerEmployedBy" name="reviewerEmployedByUpdate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Employed By</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviewer Management Forms</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="text-center">
+    <h3></h3>
+  </header>
+
+  <div class="container mt-5">
+    <div class="alert alert-success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <!-- Add Reviewer Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Add Reviewer</h2>
+      <form (ngSubmit)="addReviewer()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reviewerid"><i class="fas fa-id-badge"></i> Reviewer ID:</label>
+              <input type="number" class="form-control form-control-sm" id="reviewerid" [(ngModel)]="reviewerid" name="reviewerid" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reviewerName"><i class="fas fa-user"></i> Name:</label>
+              <input type="text" class="form-control form-control-sm" id="reviewerName" [(ngModel)]="reviewerName" name="reviewerName" required>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reviewerEmployedBy"><i class="fas fa-building"></i> Employed By:</label>
+              <input type="text" class="form-control form-control-sm" id="reviewerEmployedBy" [(ngModel)]="reviewerEmployedBy" name="reviewerEmployedBy" required>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-plus"></i> Add Reviewer</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Get Reviewer by ID Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Get Reviewer by ID</h2>
+      <form (ngSubmit)="getReviewerById()" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="revieweridSearch"><i class="fas fa-id-badge"></i> Reviewer ID:</label>
+              <input type="number" class="form-control form-control-sm" id="revieweridSearch" [(ngModel)]="reviewerid" name="revieweridSearch" required>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-search"></i> Get Reviewer</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Reviewer Details -->
+    <div class="add-book-form mb-4" *ngIf="reviewer">
+      <h2 class="text-center">Reviewer Details</h2>
+      <div class="p-4 border rounded bg-light shadow-sm">
+        <p><strong>ID:</strong> {{ reviewer.reviewerid }}</p>
+        <p><strong>Name:</strong> {{ reviewer.name }}</p>
+        <p><strong>Employed By:</strong> {{ reviewer.employedby }}</p>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update Reviewer Name Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Reviewer Name</h2>
+      <form (ngSubmit)="updateReviewerNameByReviewerId(reviewerid)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="revieweridUpdateName"><i class="fas fa-id-badge"></i> Reviewer ID:</label>
+              <input type="number" class="form-control form-control-sm" id="revieweridUpdateName" [(ngModel)]="reviewerid" name="revieweridUpdateName" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reviewerNameUpdate"><i class="fas fa-user"></i> New Name:</label>
+              <input type="text" class="form-control form-control-sm" id="reviewerNameUpdate" [(ngModel)]="reviewerName" name="reviewerNameUpdate" required>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Name</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Update Reviewer Employed By Form -->
+    <div class="add-book-form mb-4">
+      <h2 class="text-center">Update Reviewer Employed By</h2>
+      <form (ngSubmit)="updateReviewerEmployedBy(reviewerid)" class="p-4 border rounded bg-light shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="revieweridUpdateEmployedBy"><i class="fas fa-id-badge"></i> Reviewer ID:</label>
+              <input type="number" class="form-control form-control-sm" id="revieweridUpdateEmployedBy" [(ngModel)]="reviewerid" name="revieweridUpdateEmployedBy" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reviewerEmployedByUpdate"><i class="fas fa-building"></i> New Employed By:</label>
+              <input type="text" class="form-control form-control-sm" id="reviewerEmployedByUpdate" [(ngModel)]="reviewerEmployedBy" name="reviewerEmployedByUpdate" required>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Employed By</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+
+<div class="container">
+  <h1>Permrole Management</h1>
+  <form (ngSubmit)="addPermrole()" #permroleForm="ngForm">
+    <div class="form-group">
+      <label for="rolenumber">Role Number:</label>
+      <input type="number" id="rolenumber" name="rolenumber" [(ngModel)]="rolenumber" required>
+    </div>
+    <div class="form-group">
+      <label for="permrole">Perm Role:</label>
+      <input type="text" id="permrole" name="permrole" [(ngModel)]="permrole" required>
+    </div>
+    <button type="submit">Add Permrole</button>
+  </form>
+  <div id="message"></div>
+
+  <h2>Update Permrole</h2>
+  <form *ngIf="selectedPermrole" (ngSubmit)="updatePermrole(selectedPermrole.rolenumber)" #updatePermroleForm="ngForm">
+    <div class="form-group">
+      <label for="updateRolenumber">Role Number:</label>
+      <input type="number" id="updateRolenumber" name="updateRolenumber" [(ngModel)]="selectedPermrole.rolenumber" required>
+    </div>
+    <div class="form-group">
+      <label for="updatePermrole">Perm Role:</label>
+      <input type="text" id="updatePermrole" name="updatePermrole" [(ngModel)]="selectedPermrole.permrole" required>
+    </div>
+    <button type="submit">Update Permrole</button>
+  </form>
+  <div id="updateMessage"></div>
+</div>

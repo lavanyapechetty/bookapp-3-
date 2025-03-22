@@ -1,0 +1,192 @@
+/* Background styling for the entire page */
+body {
+  background-color: #f8f9fa; /* Light grey background */
+  font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.container {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button styling */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+  }
+  
+  .btn-primary {
+    background-color: #24ff57;
+    border: none;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #24ff57;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+  }
+  
+  .btn-success:hover {
+    background-color: #24ff57;
+  }
+  
+  .btn-info {
+    background-color:#24ff57;
+    border: none;
+    color: white;
+  }
+  
+  .btn-info:hover {
+    background-color: #24ff57;
+  }
+  
+  /* List item styling */
+  .list-unstyled li {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Flex utilities for list items */
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Specific styling for separate sections */
+  .book-list {
+    margin-bottom: 40px;
+  }
+  
+  .add-book-form {
+    margin-bottom: 40px;
+  }
+  
+  .edit-book-form {
+    margin-bottom: 40px;
+  }
+  
+  .get-book-form {
+    margin-bottom: 40px;
+  }
+  
+  .get-books-by-title-form {
+    margin-bottom: 40px;
+  }
+  
+  .get-books-by-category-form {
+    margin-bottom: 40px;
+  }
+  
+  .get-books-by-publisherid-form {
+    margin-bottom: 40px;
+  }
+/* new csss */
+
+body {
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .form-control-sm {
+    width: 70%;
+    margin: auto;
+  }
+  .form-group label {
+    font-weight: bold;
+  }
+  .form-group i {
+    color: #007bff;
+  }
+  .btn-custom {
+    background-color: #28a745;
+    color: white;
+  }
+  .btn-custom:hover {
+    background-color: #24ff57;
+  }
+  .btn-secondary-custom {
+    background-color: #0e7b36;
+    color: white;
+  }
+  .btn-secondary-custom:hover {
+    background-color: #24ff57;
+  }
+  .btn-info-custom {
+    background-color: #17a2b8;
+    color: white;
+  }
+  .btn-info-custom:hover {
+    background-color: #138496;
+  }
+  .btn-primary-custom {
+    background-color: #007bff;
+    color: white;
+  }
+  .btn-primary-custom:hover {
+    background-color: #0056b3;
+  }
+  .text-center h2, .text-center h3 {
+    color: #343a40;
+  }
+  .table-custom {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .table-custom th {
+    background-color: #343a40;
+    color: white;
+  }
+  .table-custom tbody tr:nth-child(odd) {
+    background-color: #e9ecef;
+  }
+  .table-custom tbody tr:hover {
+    background-color: #dee2e6;
+  }
+  .table-custom td, .table-custom th {
+    padding: 15px;
+    text-align: center;
+  }
+  .table-custom .isbn-column {
+    font-weight: bold;
+    color: #050a10;
+  }
+  .separator {
+    margin: 40px 0;
+    border-bottom: 2px solid #dee2e6;
+  }

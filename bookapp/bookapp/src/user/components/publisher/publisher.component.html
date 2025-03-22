@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publishers</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    .slide-in {
+      animation: slideIn 1s ease-in-out;
+    }
+    .table-hover tbody tr:hover {
+      background-color: #f8f9fa;
+    }
+    .container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #6c757d 25%, #343a40 100%);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="header">
+      <h2 class="mb-4 slide-in"><i class="fas fa-building"></i> Publishers</h2>
+    </div>
+    <table class="table table-hover fade-in">
+      <thead>
+        <tr>
+          <th scope="col"><i class="fas fa-user"></i> Name</th>
+          <th scope="col"><i class="fas fa-city"></i> City</th>
+          <th scope="col"><i class="fas fa-map-marker-alt"></i> State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let publisher of publishers">
+          <td>{{ publisher.name }}</td>
+          <td>{{ publisher.city }}</td>
+          <td>{{ publisher.state.stateName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

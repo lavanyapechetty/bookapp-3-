@@ -1,0 +1,121 @@
+<!-- <p>bookreview works!</p>
+
+<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div>
+  <h3>Add Book Review</h3>
+  <form (ngSubmit)="addBookReview()">
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" [(ngModel)]="newBookReview.isbn" name="isbn" required>
+   
+    <label for="reviewerid">Reviewer ID:</label>
+    <input type="number" id="reviewerid" [(ngModel)]="newBookReview.reviewerid" name="reviewerid" required>
+   
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" [(ngModel)]="newBookReview.rating" name="rating" required>
+   
+    <label for="comments">Comments:</label>
+    <input type="text" id="comments" [(ngModel)]="newBookReview.comments" name="comments" required>
+   
+    <button type="submit">Add Review</button>
+  </form>
+</div>
+
+<div>
+  <h3>Get Reviews by ISBN</h3>
+  <form (ngSubmit)="getReviewsByIsbn()">
+    <label for="isbnSearch">ISBN:</label>
+    <input type="text" id="isbnSearch" [(ngModel)]="isbnSearch" name="isbnSearch" required>
+    <button type="submit">Get Reviews</button>
+  </form>
+</div>
+
+<div *ngIf="reviewsByIsbn.length > 0; else noReviewsByIsbn">
+  <h3>Reviews for ISBN: {{ isbnSearch }}</h3>
+  <ul>
+    <li *ngFor="let review of reviewsByIsbn">
+      Reviewer ID: {{ review.reviewerid }}, Rating: {{ review.rating }}, Comments: {{ review.comments }}
+    </li>
+  </ul>
+</div>
+<ng-template #noReviewsByIsbn>
+  <p>No reviews available for this ISBN.</p>
+</ng-template>
+
+<div>
+  <h3>Update Rating</h3>
+  <form (ngSubmit)="updateRating()">
+    <label for="isbnUpdate">ISBN:</label>
+    <input type="text" id="isbnUpdate" [(ngModel)]="isbnUpdate" name="isbnUpdate" required>
+   
+    <label for="ratingUpdate">New Rating:</label>
+    <input type="number" id="ratingUpdate" [(ngModel)]="ratingUpdate" name="ratingUpdate" required>
+   
+    <button type="submit">Update Rating</button>
+  </form>
+</div>
+
+<div>
+  <h3>Update Comments</h3>
+  <form (ngSubmit)="updateComments()">
+    <label for="isbnCommentsUpdate">ISBN:</label>
+    <input type="text" id="isbnCommentsUpdate" [(ngModel)]="isbnCommentsUpdate" name="isbnCommentsUpdate" required>
+   
+    <label for="commentsUpdate">New Comments:</label>
+    <input type="text" id="commentsUpdate" [(ngModel)]="commentsUpdate" name="commentsUpdate" required>
+   
+    <button type="submit">Update Comments</button>
+  </form>
+</div>
+  -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reviews</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+   
+
+    <!-- Display success and error messages -->
+    <div *ngIf="successMessage" class="alert alert-success fade-in">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger fade-in">{{ errorMessage }}</div>
+
+    <!-- Form to add a new book review -->
+   
+    <!-- Form to get all reviews by ISBN -->
+    <div>
+      <h3 class="fade-in">Get Reviews by ISBN</h3>
+      <form (ngSubmit)="getReviewsByIsbn()">
+        <div class="form-group">
+          <label for="isbnSearch">ISBN:</label>
+          <input type="text" class="form-control" id="isbnSearch" [(ngModel)]="isbnSearch" name="isbnSearch" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Get Reviews</button>
+      </form>
+    </div>
+
+    <!-- Display reviews by ISBN -->
+    <div *ngIf="reviewsByIsbn.length > 0; else noReviewsByIsbn">
+      <h3 class="fade-in">Reviews for ISBN: {{ isbnSearch }}</h3>
+      <ul class="list-group fade-in">
+        <li class="list-group-item" *ngFor="let review of reviewsByIsbn">
+          Reviewer ID: {{ review.reviewerid }}, Rating: {{ review.rating }}, Comments: {{ review.comments }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noReviewsByIsbn>
+      <p class="fade-in">No reviews available for this ISBN.</p>
+    </ng-template>
+
+    <!-- Form to update rating -->
+    
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+

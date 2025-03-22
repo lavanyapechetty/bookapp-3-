@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f4f9;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+    .form-control-sm {
+      width: 50%; /* Adjust the width as needed */
+      margin: auto;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-group i {
+      color: #007bff;
+    }
+    .btn-custom {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-custom:hover {
+      background-color: #24ff57;
+    }
+    .btn-secondary-custom {
+      background-color: #0e7b36;
+      color: white;
+    }
+    .btn-secondary-custom:hover {
+      background-color: #24ff57;
+    }
+    .text-center h2, .text-center h3 {
+      color: #343a40;
+    }
+    .table-custom {
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .table-custom th {
+      background-color: #343a40;
+      color: white;
+    }
+    .table-custom tbody tr:nth-child(odd) {
+      background-color: #e9ecef;
+    }
+    .table-custom tbody tr:hover {
+      background-color: #dee2e6;
+    }
+    .table-custom td, .table-custom th {
+      padding: 15px;
+      text-align: center;
+    }
+    .table-custom .isbn-column {
+      font-weight: bold;
+      color: #050a10;
+    }
+    .separator {
+      margin: 40px 0;
+      border-bottom: 2px solid #dee2e6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="text-center">Add Inventory</h2>
+    <form (ngSubmit)="addInventory(newInventory)" class="p-4 border rounded bg-light shadow-sm">
+      <div class="form-group">
+        <label for="inventoryId"><i class="fas fa-id-badge"></i> Inventory ID:</label>
+        <input type="number" id="inventoryId" [(ngModel)]="newInventory.inventoryId" name="inventoryId" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="isbn"><i class="fas fa-barcode"></i> ISBN:</label>
+        <input type="text" id="isbn" [(ngModel)]="newInventory.isbn" name="isbn" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="ranks"><i class="fas fa-star"></i> Ranks:</label>
+        <input type="number" id="ranks" [(ngModel)]="newInventory.ranks" name="ranks" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="purchased"><i class="fas fa-check"></i> Purchased:</label>
+        <input type="checkbox" id="purchased" [(ngModel)]="newInventory.purchased" name="purchased" class="form-control form-control-sm">
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-custom btn-sm"><i class="fas fa-plus"></i> Add Inventory</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <h2 class="text-center">Inventory List</h2>
+    <div class="table-responsive table-custom">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Inventory ID</th>
+            <th>ISBN</th>
+            <th>Ranks</th>
+            <th>Purchased</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inventory of inventories">
+            <td>{{ inventory.inventoryId }}</td>
+            <td>{{ inventory.isbn }}</td>
+            <td>{{ inventory.ranks }}</td>
+            <td>{{ inventory.purchased }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="text-center">Update Inventory</h2>
+    <form (ngSubmit)="updateInventory(updateInventoryId, updatedInventory)" class="p-4 border rounded bg-light shadow-sm">
+      <div class="form-group">
+        <label for="updateInventoryId"><i class="fas fa-id-badge"></i> Inventory ID:</label>
+        <input type="number" id="updateInventoryId" [(ngModel)]="updateInventoryId" name="updateInventoryId" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="isbn"><i class="fas fa-barcode"></i> ISBN:</label>
+        <input type="text" id="isbn" [(ngModel)]="updatedInventory.isbn" name="isbn" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="ranks"><i class="fas fa-star"></i> Ranks:</label>
+        <input type="number" id="ranks" [(ngModel)]="updatedInventory.ranks" name="ranks" class="form-control form-control-sm" required>
+      </div>
+      <div class="form-group">
+        <label for="purchased"><i class="fas fa-check"></i> Purchased:</label>
+        <input type="checkbox" id="purchased" [(ngModel)]="updatedInventory.purchased" name="purchased" class="form-control form-control-sm">
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-secondary-custom btn-sm"><i class="fas fa-sync-alt"></i> Update Inventory</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <h2 class="text-center">Get Inventory By ID</h2>
+    <form (ngSubmit)="getInventoryById(getInventoryId)" class="p-4 border rounded bg-light shadow-sm">
+      <div class="form-group">
+        <label for="getInventoryId"><i class="fas fa-id-badge"></i> Inventory ID:</label>
+        <input type="number" id="getInventoryId" [(ngModel)]="getInventoryId" name="getInventoryId" class="form-control form-control-sm" required>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-secondary-custom btn-sm"><i class="fas fa-search"></i> Get Inventory</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="inventory-container">
+  <h2>Inventory List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Inventory ID</th>
+        <th>ISBN</th>
+        <th>Ranks</th>
+        <th>Purchased</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventory of inventories">
+        <td>{{ inventory.inventoryId }}</td>
+        <td>{{ inventory.isbn }}</td>
+        <td>{{ inventory.ranks }}</td>
+        <td>{{ inventory.purchased }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <h3>Add Inventory</h3>
+    <form (submit)="addInventory(newInventory)">
+      <label for="inventoryId">Inventory ID:</label>
+      <input type="number" id="inventoryId" [(ngModel)]="newInventory.inventoryId" name="inventoryId" required>
+     
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" [(ngModel)]="newInventory.isbn" name="isbn" required>
+     
+      <label for="ranks">Ranks:</label>
+      <input type="number" id="ranks" [(ngModel)]="newInventory.ranks" name="ranks" required>
+     
+      <label for="purchased">Purchased:</label>
+      <input type="checkbox" id="purchased" [(ngModel)]="newInventory.purchased" name="purchased">
+     
+      <button type="submit">Add Inventory</button>
+    </form>
+  </div>
+  <div>
+    <h3>Update Inventory</h3>
+    <form (submit)="updateInventory(updateInventoryId, updatedInventory)">
+      <label for="updateInventoryId">Inventory ID:</label>
+      <input type="number" id="updateInventoryId" [(ngModel)]="updateInventoryId" name="updateInventoryId" required>
+     
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" [(ngModel)]="updatedInventory.isbn" name="isbn" required>
+     
+      <label for="ranks">Ranks:</label>
+      <input type="number" id="ranks" [(ngModel)]="updatedInventory.ranks" name="ranks" required>
+     
+      <label for="purchased">Purchased:</label>
+      <input type="checkbox" id="purchased" [(ngModel)]="updatedInventory.purchased" name="purchased">
+     
+      <button type="submit">Update Inventory</button>
+    </form>
+  </div>
+  <div>
+    <h3>Get Inventory By ID</h3>
+    <form (submit)="getInventoryById(getInventoryId)">
+      <label for="getInventoryId">Inventory ID:</label>
+      <input type="number" id="getInventoryId" [(ngModel)]="getInventoryId" name="getInventoryId" required>
+     
+      <button type="submit">Get Inventory</button>
+    </form>
+  </div>
+</div> -->
